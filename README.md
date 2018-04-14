@@ -1,2 +1,3 @@
-# gmodal
-a modal layer for react
+# GModal
+
+A modal layer for react
