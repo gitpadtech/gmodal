@@ -1,0 +1,14 @@
+.popup-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.popup-window {
+  text-align: center;
+  height: 200px;
+  width: 200px;
+  background: white;
+  box-shadow:0 0 3px #aaaaaa;
+}

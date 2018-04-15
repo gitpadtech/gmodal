@@ -7,6 +7,7 @@ module.exports = env => {
   const config = webpackMerge(
     baseConfig(env),
     {
+      devtool: 'inline-source-map',
       mode: 'development',
       output: {
         filename: '[name].development.js'

@@ -12,7 +12,7 @@ module.exports = env => {
     {
       mode: 'production',
       output: {
-        filename: '[name].production.js'
+        filename: '[name].production.min.js'
       },
       module: {
         rules: [

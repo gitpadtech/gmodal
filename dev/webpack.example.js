@@ -7,6 +7,7 @@ const devConfig = require('./webpack.development');
 module.exports = (env) => {
   const base = devConfig(env);
   delete base.entry;
+  delete base.externals;
   const config = webpackMerge(
     base,
     {
