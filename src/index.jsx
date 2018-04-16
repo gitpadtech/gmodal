@@ -30,11 +30,13 @@ export default class GModal extends Component {
         }
       }
       return () => {
-        if (!$rootLayer) {
-          $rootLayer = create();
-        }
         return {
-          layer: $rootLayer,
+          get layer() {
+            if (!$rootLayer) {
+              $rootLayer = create();
+            }
+            return $rootLayer;
+          },
           destroy,
         }
       }
@@ -48,13 +50,9 @@ export default class GModal extends Component {
   }
   componentDidUpdate(prevProps, prevState) {
     if (this.state.show) {
-      if (!this.props.show) {
-        this.hideMe();
-      }
+      !this.props.show && this.hideMe();
     } else {
-      if (this.props.show) {
-        this.showMe();
-      }
+      this.props.show && this.showMe();
     }
   }
   componentDidMount() {
@@ -86,8 +84,9 @@ export default class GModal extends Component {
       this.layer.addEventListener('transitionend', () => {
         this.setState({
           show: false
+        }, () => {
+          this.getRoot().destroy();
         });
-        this.getRoot().destroy();
       });
     } else {
       this.setState({
