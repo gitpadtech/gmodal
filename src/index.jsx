@@ -6,41 +6,14 @@ import './index.scss';
 export default class GModal extends Component {
   static defaultProps = {
     animated: true,
-    show: false
+    show: false,
+    preventBouncing: true
   }
   static propTypes = {
     children: PropTypes.any,
     animated: PropTypes.bool,
     show: PropTypes.bool,
-  }
-  constructor(props) {
-    super(props);
-    this.getRoot = (() => {
-      let $rootLayer = null;
-      function create() {
-        $rootLayer = document.createElement('div');
-        $rootLayer.classList.add('g-modal-layer');
-        document.body.appendChild($rootLayer);
-        return $rootLayer;
-      }
-      function destroy() {
-        if ($rootLayer) {
-          document.body.removeChild($rootLayer);
-          $rootLayer = null;
-        }
-      }
-      return () => {
-        return {
-          get layer() {
-            if (!$rootLayer) {
-              $rootLayer = create();
-            }
-            return $rootLayer;
-          },
-          destroy,
-        }
-      }
-    })();
+    preventBouncing: PropTypes.bool,
   }
   state = {
     show: false,
@@ -66,6 +39,37 @@ export default class GModal extends Component {
   get layer() {
     return this.getRoot().layer;
   }
+  getRoot = (() => {
+    let $rootLayer = null;
+    const create = () => {
+      $rootLayer = document.createElement('div');
+      $rootLayer.classList.add('g-modal-layer');
+      /* istanbul ignore next */
+      if (this.props.preventBouncing) {
+        $rootLayer.addEventListener('touchmove', e => e.preventDefault());
+        $rootLayer.addEventListener('wheel', e => e.preventDefault());
+      }
+      document.body.appendChild($rootLayer);
+      return $rootLayer;
+    }
+    function destroy() {
+      if ($rootLayer) {
+        document.body.removeChild($rootLayer);
+        $rootLayer = null;
+      }
+    }
+    return () => {
+      return {
+        get layer() {
+          if (!$rootLayer) {
+            $rootLayer = create();
+          }
+          return $rootLayer;
+        },
+        destroy,
+      }
+    }
+  })();
   showMe() {
     this.setState({
       show: true
@@ -74,7 +78,7 @@ export default class GModal extends Component {
         this.layer.style.opacity = 0;
         setTimeout(() => {
           this.layer.style.opacity = 1;
-        }, 0);
+        }, 1);
       }
     });
   }

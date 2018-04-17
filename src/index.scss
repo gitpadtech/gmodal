@@ -8,4 +8,5 @@
   transition: opacity linear 230ms;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
+  z-index: 9990;
 }

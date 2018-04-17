@@ -5,7 +5,7 @@ import './basic.scss';
 export default class Basic extends Component {
   state = {
     show: false,
-    time: new Date().toString()
+    time: new Date().getSeconds()
   }
   switch = () => {
     this.setState({
@@ -15,21 +15,21 @@ export default class Basic extends Component {
   componentDidMount() {
     setInterval(() => {
       this.setState({
-        time: new Date().toString(),
+        time: new Date().getSeconds(),
       });
     }, 1000);
   }
   render() {
     return (
-      <div>
+      <div className="basic-example">
         <button className="cool-btn" onClick={this.switch}>show</button>
         <GModal
           show={this.state.show}
         >
           <div className="popup-layout">
             <div className="popup-window">
-              {this.state.time} <br />
-              <button className="cool-btn" onClick={this.switch}>switch</button>
+              <h1>{this.state.time}</h1> <br />
+              <button className="cool-btn" onClick={this.switch}>hide</button>
            </div>
           </div>
         </GModal>

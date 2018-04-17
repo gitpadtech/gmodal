@@ -1,7 +1,6 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import GModal from  '../index';
-import { wrap } from 'module';
 
 function findLayers() {
   return [...document.body.querySelectorAll('.g-modal-layer')];
@@ -11,20 +10,38 @@ afterEach(() => {
   jest.useRealTimers();
 });
 
+describe('Should render children correctly', () => {
+  test('Should render children when show is true', () => {
+    mount(
+      <GModal show>
+        <div className="popup">children</div>
+      </GModal>
+    );
+    expect(document.querySelector('.popup')).toBeTruthy();
+  });
+  test("Shouldn't render children when show is false", () => {
+    mount(
+      <GModal>
+        <div className="popup">children</div>
+      </GModal>
+    );
+    expect(document.querySelector('.popup')).toBeFalsy();
+  });
+});
 test('Should create layer element lazily', () => {
   mount(
     <GModal/>
   );
   expect(findLayers().length).toBe(0);
   mount(
-    <GModal show/>
+    <GModal show />
   );
   expect(findLayers().length).toBe(1);
 });
 
 test('Should destroy layer element when unmount', () => {
   const showed = mount(
-    <GModal show/>
+    <GModal show />
   );
   expect(findLayers().length).toBe(1);
   showed.unmount();
@@ -38,7 +55,7 @@ test('Should destroy layer element when unmount', () => {
 });
 
 describe('Change appearance', () => {
-  test('from disappearance to appearance', () => {
+  test('From disappearance to appearance', () => {
     const wrapper = mount(
       <GModal />
     );
@@ -62,7 +79,7 @@ describe('Show layer', () => {
   test('Should show with transition', () => {
     jest.useFakeTimers();
     const instance = mount(
-      <GModal show/>
+      <GModal show />
     ).instance();
   
     expect(instance.layer.style.opacity).toBe('0');
@@ -78,9 +95,9 @@ describe('Show layer', () => {
 });
 
 describe('Hide layer', () => {
-  test('Should hide layer when transition end', () => {
+  test('Should destroy layer when transition end', () => {
     const wrapper = mount(
-      <GModal show/>
+      <GModal show preventBouncing={false} />
     );
     const instance = wrapper.instance();
     wrapper.setProps({
