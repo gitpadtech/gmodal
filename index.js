@@ -1,5 +1,5 @@
 if (process.env.NODE_ENV === 'production') {
-  module.exports = require('./dist/react.production.min.js');
+  module.exports = require('./dist/gmodal.production.min');
 } else {
-  module.exports = require('./dist/react.development.js');
+  module.exports = require('./dist/gmodal.development');
 }
