@@ -12,6 +12,7 @@
     "pub": "npm publish --access public",
     "test": "node ./dev/jest/start.js",
     "test:coverage": "npm run test -- --coverage",
+    "ghpages": "npm run example && git subtree push --prefix example-dist/ origin gh-pages",
     "coverage": "cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
