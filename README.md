@@ -25,4 +25,4 @@ import GModal from '@gitpad/gmodal';
 
 ## How does it work?
 
-It's power by React portal in React 16, so it's only compatible with React 16
+It's powered by React portal in React 16, so it's only compatible with React 16
