@@ -15,7 +15,7 @@ npm install @gitpad/gmodal
 
 ```jsx
 import GModal from '@gitpad/gmodal';
-
+import '@gitpad/gmodal/dist/gmodal.css';
 // ...
 <GModal show>
   <div className="popup">A popup window</div>
