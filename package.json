@@ -1,6 +1,6 @@
 {
   "name": "@gitpad/gmodal",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A modal layer for react",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "dist": "npm run clean && webpack --config ./dev/webpack.config.js",
     "example": "webpack --config ./dev/webpack.example.js",
     "start": "node ./dev/serve.js",
-    "prepublish": "npm run dist",
+    "prepublishOnly": "npm run dist",
     "pub": "npm publish --access public",
     "test": "node ./dev/jest/start.js",
     "test:coverage": "npm run test -- --coverage",
